@@ -1,0 +1,57 @@
+# ===========================================================================
+#  Gihonawit Online Bookstore — Apache configuration
+#  Lives in htdocs/gihonawit-bookstore/
+# ===========================================================================
+#  If Apache reports "Invalid command 'Options'", the directives below are not
+#  enabled on your build — you can delete this file and the app still runs.
+
+Options -Indexes -MultiViews
+DirectoryIndex index.php index.html
+AddDefaultCharset UTF-8
+
+# ---------------------------------------------------------------------------
+# Never serve source, configuration, or documentation over HTTP
+# ---------------------------------------------------------------------------
+<FilesMatch "\.(sql|md|ini|log|sh|bak|env|json|lock)$">
+    <IfModule mod_authz_core.c>
+        Require all denied
+    </IfModule>
+    <IfModule !mod_authz_core.c>
+        Order allow,deny
+        Deny from all
+    </IfModule>
+</FilesMatch>
+
+<FilesMatch "^\.(git|htaccess|htpasswd)">
+    <IfModule mod_authz_core.c>
+        Require all denied
+    </IfModule>
+    <IfModule !mod_authz_core.c>
+        Order allow,deny
+        Deny from all
+    </IfModule>
+</FilesMatch>
+
+# ---------------------------------------------------------------------------
+# Basic security headers
+# ---------------------------------------------------------------------------
+<IfModule mod_headers.c>
+    Header always set X-Content-Type-Options "nosniff"
+    Header always set X-Frame-Options "SAMEORIGIN"
+    Header always set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>
+
+# ---------------------------------------------------------------------------
+# Caching and compression for the static assets
+# ---------------------------------------------------------------------------
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresByType text/css               "access plus 7 days"
+    ExpiresByType application/javascript "access plus 7 days"
+    ExpiresByType image/jpeg             "access plus 30 days"
+    ExpiresByType image/svg+xml          "access plus 30 days"
+</IfModule>
+
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/plain text/css application/javascript application/json image/svg+xml
+</IfModule>
