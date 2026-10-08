@@ -238,6 +238,15 @@
     var toggle = document.querySelector('[data-nav-toggle]');
     var menu = document.querySelector('[data-nav]');
 
+    // Close open details dropdowns when clicking outside
+    document.addEventListener('click', function (event) {
+      document.querySelectorAll('details[open]').forEach(function (details) {
+        if (!details.contains(event.target)) {
+          details.removeAttribute('open');
+        }
+      });
+    });
+
     if (!toggle || !menu) { return; }
 
     toggle.addEventListener('click', function () {

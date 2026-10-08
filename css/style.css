@@ -302,7 +302,12 @@ small { font-size: .84rem; }
    --------------------------------------------------------------------------- */
 .topline { height: 4px; background: linear-gradient(90deg, var(--forest) 0%, var(--forest-700) 55%, var(--gold) 100%); }
 
-.masthead { background: var(--white); border-bottom: 1px solid var(--line-soft); }
+.masthead {
+  position: relative;
+  z-index: 60;
+  background: var(--white);
+  border-bottom: 1px solid var(--line-soft);
+}
 .masthead__inner {
   display: flex; align-items: center; gap: 26px;
   padding-block: 16px; flex-wrap: wrap;
@@ -370,6 +375,8 @@ small { font-size: .84rem; }
 .suggest__all { padding: 11px 14px; font-weight: 600; color: var(--forest); background: var(--cream); font-size: .86rem; }
 
 .utilities { display: flex; align-items: center; gap: 20px; margin-left: auto; }
+.user-menu { position: relative; z-index: 80; }
+.user-menu > summary::-webkit-details-marker { display: none; }
 .utility {
   position: relative;
   display: inline-flex; align-items: center; gap: 9px;
@@ -437,6 +444,7 @@ small { font-size: .84rem; }
   border-radius: var(--radius);
   box-shadow: var(--shadow-lg);
   display: flex; flex-direction: column;
+  z-index: 100;
 }
 .lang__menu a {
   display: flex; align-items: center; justify-content: space-between; gap: 10px;

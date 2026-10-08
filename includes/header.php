@@ -111,7 +111,7 @@ $gb_config = [
 
         <div class="utilities">
             <?php if ($user !== null): ?>
-                <details style="position:relative">
+                <details class="user-menu" style="position:relative;z-index:100">
                     <summary class="utility" style="list-style:none;cursor:pointer">
                         <?= icon('user') ?>
                         <span class="utility__text">
@@ -119,7 +119,7 @@ $gb_config = [
                             <small><?= is_admin() ? 'Administrator' : 'Customer' ?></small>
                         </span>
                     </summary>
-                    <div class="lang__menu" style="right:auto;left:0">
+                    <div class="lang__menu user-menu__dropdown" style="right:auto;left:0;z-index:100">
                         <a href="<?= e(url('my-orders.php')) ?>"><?= e(t('order.my')) ?></a>
                         <a href="<?= e(url('wishlist.php')) ?>"><?= e(t('wish.title')) ?></a>
                         <?php if (is_admin()): ?>
